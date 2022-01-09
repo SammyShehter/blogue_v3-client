@@ -7,7 +7,7 @@ export const ArticlePreview = ({ link }) => {
         const hr = dt.getUTCHours();
         const m = "0" + dt.getUTCMinutes();
         
-        return hr + ':' + m.substr(-2)
+        return hr + ':' + m.substring(-2)
       }
 
     const expiresIn = () => {

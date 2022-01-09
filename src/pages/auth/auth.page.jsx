@@ -35,13 +35,13 @@ export const AuthPage = () => {
 
     const registeHandler = async () => {
         try {
-            const data = await request('/users/register', 'POST', { ...form })
+            const data = await request('localhost:10000/login', 'POST', { ...form })
             message(data.message)
         } catch (e) {}
     }
     const loginHandler = async () => {
         try {
-            const {token} = await request('/users/login', 'POST', { ...form })
+            const {token} = await request('localhost:10000/login', 'POST', { ...form })
             auth.login(token)
         } catch (e) {}
     }
