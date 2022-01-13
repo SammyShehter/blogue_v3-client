@@ -32,13 +32,6 @@ export const AuthPage = () => {
             [event.currentTarget.name]: event.currentTarget.value,
         })
     }
-
-    const registeHandler = async () => {
-        try {
-            const data = await request('localhost:10000/login', 'POST', { ...form })
-            message(data.message)
-        } catch (e) {}
-    }
     const loginHandler = async () => {
         try {
             const {token} = await request('localhost:10000/login', 'POST', { ...form })
@@ -93,7 +86,7 @@ export const AuthPage = () => {
                         </button>
                         <button
                             className='btn grey lighten-1 black-text'
-                            onClick={registeHandler}
+                            onClick={loginHandler}
                             disabled={loading}
                         >
                             Sign up

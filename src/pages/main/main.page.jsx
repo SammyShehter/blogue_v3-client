@@ -12,7 +12,7 @@ export const MainPage = () => {
 
     const getArticles = useCallback(async () => {
         try {
-            const articles = await request(`localhost:8000/posts`, 'GET')
+            const articles = await request(`blogue.sammyshehter.com/posts`, 'GET')
             setArticles(articles.data)
             console.log(articles);
         } catch (e) {}
@@ -24,5 +24,14 @@ export const MainPage = () => {
 
     if (loading) return <Loader />
 
-    return <>{!loading && <ArticlesList articles={articles} />}</>
+    return (
+    <div>
+        <div className='row'>
+        <ArticlesList articles={articles} />
+        <div className='s12 m4'>
+            <h2>Hi</h2>
+        </div>
+
+        </div>
+    </div>)
 }

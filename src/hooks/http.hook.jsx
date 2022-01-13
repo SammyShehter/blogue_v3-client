@@ -10,7 +10,7 @@ export const useHttp = () => {
                 setLoading(true)
                 const response = await axios({
                     method,
-                    url: `http://${url}`,
+                    url: `https://${url}`,
                     data,
                     headers
                 })
