@@ -4,7 +4,6 @@ import { useHttp } from '../../hooks/http.hook'
 import { useEffect } from 'react'
 import { useMessage } from '../../hooks/message.hook'
 import authContext from '../../contexts/auth.context'
-import 'materialize-css'
 
 export const AuthPage = () => {
     const auth = useContext(authContext)
@@ -15,10 +14,6 @@ export const AuthPage = () => {
         username: '',
         password: '',
     })
-
-    useEffect(() => {
-        window.M.updateTextFields()
-    }, [])
 
     useEffect(() => {
         errors.forEach((error) => {

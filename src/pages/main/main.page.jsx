@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 // import { useContext } from 'react'
 import { ArticlesList } from '../../components/articlesList/articlesList.component'
 import { Loader } from '../../components/loader/loader.component'
-import authContext from '../../contexts/auth.context'
+// import authContext from '../../contexts/auth.context'
 import { useHttp } from '../../hooks/http.hook'
 
 export const MainPage = () => {
@@ -12,9 +12,20 @@ export const MainPage = () => {
 
     const getArticles = useCallback(async () => {
         try {
-            const articles = await request(`blogue.sammyshehter.com/posts`, 'GET')
+            // const articles = await request(`blogue.sammyshehter.com/posts`, 'GET')
+            const articles = {data: [
+                {
+                    id: 1,
+                    title: 'First Post',
+                    slug: 'first_post',
+                    text: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
+                    viewed: 0,
+                    image: 'default',
+                    createdAt: '2022-01-13T16:01:24.575Z',
+                    updatedAt: '2022-01-13T16:01:24.575Z',
+                },
+            ]}
             setArticles(articles.data)
-            console.log(articles);
         } catch (e) {}
     }, [request])
 
@@ -25,13 +36,13 @@ export const MainPage = () => {
     if (loading) return <Loader />
 
     return (
-    <div>
-        <div className='row'>
-        <ArticlesList articles={articles} />
-        <div className='s12 m4'>
-            <h2>Hi</h2>
+        <div>
+            <div className='row'>
+                <ArticlesList articles={articles} />
+                <div className='s12 m4'>
+                    <h2>Hi</h2>
+                </div>
+            </div>
         </div>
-
-        </div>
-    </div>)
+    )
 }
