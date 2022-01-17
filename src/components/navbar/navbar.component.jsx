@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import authContext from '../../contexts/auth.context'
 import './navbar.component.scss'
@@ -14,18 +14,17 @@ export const Navbar = () => {
     }
     
     useEffect(() => {
+        
         const clickOutsideHamburger = e => {
-            console.log('x');
-            if(switchMobMenu && ref.current && !ref.current.contains(e.target)) {
-                console.log('y');
-                setSwitchMobMenu(false)
+            
+            if(switchMobMenu && ref.current && !ref.current.contains(e.target) && !e.target.classList.contains('hamMenu')) {
+                setSwitchMobMenu(!switchMobMenu)
             }
+        }
+        document.addEventListener('mousedown', clickOutsideHamburger)
 
-            document.addEventListener('mousedown', clickOutsideHamburger)
-
-            return () => {
-                document.removeEventListener('mousedown', clickOutsideHamburger)
-            }
+        return () => {
+            document.removeEventListener('mousedown', clickOutsideHamburger)
         }
     }, [switchMobMenu])
 
@@ -75,10 +74,10 @@ export const Navbar = () => {
                             </div>
                         </div>
                         {/* mobile buttons here */}
-                        <button className='md:hidden flex item-center py-4 px-7' onClick={manipulateMobileMenu} ref={ref}>
+                        <button className='md:hidden flex item-center py-4 px-7 hamMenu' onClick={manipulateMobileMenu}>
                             <svg
                                 xmlns='http://www.w3.org/2000/svg'
-                                class='h-6 w-6'
+                                className='h-6 w-6 hamMenu'
                                 fill='none'
                                 viewBox='0 0 24 24'
                                 stroke='currentColor'
@@ -94,7 +93,7 @@ export const Navbar = () => {
                     </div>
                 </div>
                 {/* mobile menu */}
-                <div className={`md:hidden ${switchMobMenu ? '' : 'hidden'}`}>
+                <div className={`md:hidden ${switchMobMenu ? '' : 'hidden'}`} ref={ref}>
                     <a
                         href='#'
                         className='block py-2 text-sm hover:bg-grey-200'
