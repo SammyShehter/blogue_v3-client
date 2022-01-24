@@ -25,7 +25,7 @@ function App() {
         <AuthContext.Provider value={authContextValue}>
             <Router>
                 {isAuhtenticated ? <PrivateNavBar/> : <Navbar/>}
-                <div className='container'>{routes}</div>
+                <div className='container mx-auto'>{routes}</div>
             </Router>
         </AuthContext.Provider>
     )
