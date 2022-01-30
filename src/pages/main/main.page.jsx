@@ -38,18 +38,6 @@ export const MainPage = () => {
     if (loading) return <Loader />
 
     return (
-        
-            <div className='flex h-screen justify-center items-center flex-col'>
-                <h1 className='text-3xl'>
-                    Welcome to <strong>www.sammyshehter.com</strong>
-                </h1>
-                <p className='text-2xl'>Website is under construction</p>
-                <p className='text-2xl'>
-                    For now you can listen to{' '}
-                    <a href='radio.sammyshehter.com'>
-                        <u><strong>radio</strong></u>
-                    </a>
-                </p>
-            </div>
+        <ArticlesList articles={articles}/>
     )
 }

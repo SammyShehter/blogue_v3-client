@@ -7,19 +7,33 @@ export const ArticlesList = ({ articles }) => {
 
     const articlesOrder = articles.map((article) => {
         return (
-            <div className='card hoverable' key='{article.slug}'>
-                <div className='card-image'>
-                    <img src={`./${article.image}.jpg`} />
-                    <span className='card-title'>Card Title</span>
-                </div>
-                <div className='card-content'>
-                    <div className='text-sky-500 dark:text-sky-400'>
-                        {article.title}
+            <div
+                className='flex flex-col bg-white mx-3 mt-12 lg:px-0 lg:w-7/12'
+                key='{article.slug}'
+            >
+                <img
+                    class='object-cover h-96'
+                    src={`./${article.image}.jpg`}
+                    alt='x'
+                />
+
+                <div class='p-6 md:p-8 text-left space-y-4'>
+                    <div class='text-sky-500 dark:text-sky-400'>
+                        <p>date-here</p>
                     </div>
-                    <div className='text-gray-700 dark:text-gray-500'>
-                        <Link to={`post/${article.slug}`}>Details</Link>
-                    </div>
-                    <p>{article.text}</p>
+                    <blockquote>
+                        <Link
+                            class='text-lg font-medium'
+                            to={`post/${article.slug}`}
+                        >
+                            {article.title}
+                        </Link>
+                    </blockquote>
+                    <figcaption class='font-medium'>
+                        <div class='text-slate-700 dark:text-slate-500'>
+                            Some text
+                        </div>
+                    </figcaption>
                 </div>
             </div>
         )

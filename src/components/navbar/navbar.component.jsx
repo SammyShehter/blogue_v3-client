@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import authContext from '../../contexts/auth.context'
 import './navbar.component.scss'
+import { base64Boy } from './base64Boy.js'
 
 export const Navbar = () => {
     const ref = useRef()
@@ -12,12 +13,15 @@ export const Navbar = () => {
     const manipulateMobileMenu = () => {
         setSwitchMobMenu(!switchMobMenu)
     }
-    
+
     useEffect(() => {
-        
-        const clickOutsideHamburger = e => {
-            
-            if(switchMobMenu && ref.current && !ref.current.contains(e.target) && !e.target.classList.contains('hamMenu')) {
+        const clickOutsideHamburger = (e) => {
+            if (
+                switchMobMenu &&
+                ref.current &&
+                !ref.current.contains(e.target) &&
+                !e.target.classList.contains('hamMenu')
+            ) {
                 setSwitchMobMenu(!switchMobMenu)
             }
         }
@@ -36,13 +40,13 @@ export const Navbar = () => {
     return (
         <>
             <nav class='bg-white'>
-                <div className='max-w-7xl mx-auto'>
+                <div className='max-w-screen-2xl mx-auto'>
                     <div className='flex justify-between items-center'>
-                        <div className='flex space-x-4'>
+                        <div className='flex space-x-4 py-0'>
                             {/* logo */}
                             <div className='flex'>
-                                <NavLink to='/' className='py-4 px-6'>
-                                    logo
+                                <NavLink to='/'>
+                                    <img src={base64Boy} alt='Best boi' />
                                 </NavLink>
                             </div>
                             {/* pipe */}
@@ -53,13 +57,13 @@ export const Navbar = () => {
                             <div className='hidden md:flex item-center text-gray-700'>
                                 <a
                                     href='#'
-                                    className='py-4 px-7 hover:text-black transition duration-300'
+                                    className='py-3 px-7 hover:text-black transition duration-300'
                                 >
                                     Num1
                                 </a>
                                 <a
                                     href='#'
-                                    className='py-4 px-4 hover:text-black transition duration-300'
+                                    className='py-3 px-4 hover:text-black transition duration-300'
                                 >
                                     Num2
                                 </a>
@@ -68,13 +72,16 @@ export const Navbar = () => {
                         {/* secondary nav */}
                         <div>
                             <div className='hidden md:flex item-center text-gray-700 hover:text-black transition duration-300'>
-                                <NavLink to='/login' className='py-4 px-7'>
+                                <NavLink to='/login' className='py-3 px-7'>
                                     Login
                                 </NavLink>
                             </div>
                         </div>
                         {/* mobile buttons here */}
-                        <button className='md:hidden flex item-center py-4 px-7 hamMenu' onClick={manipulateMobileMenu}>
+                        <button
+                            className='md:hidden flex item-center py-3 px-7 hamMenu relative'
+                            onClick={manipulateMobileMenu}
+                        >
                             <svg
                                 xmlns='http://www.w3.org/2000/svg'
                                 className='h-6 w-6 hamMenu'
@@ -93,7 +100,12 @@ export const Navbar = () => {
                     </div>
                 </div>
                 {/* mobile menu */}
-                <div className={`md:hidden ${switchMobMenu ? '' : 'hidden'}`} ref={ref}>
+                <div
+                    className={`md:hidden${
+                        switchMobMenu ? '' : ' hidden'
+                    } absolute z-10 bg-white w-full px-4`}
+                    ref={ref}
+                >
                     <a
                         href='#'
                         className='block py-2 text-sm hover:bg-grey-200'
@@ -104,7 +116,7 @@ export const Navbar = () => {
                         href='#'
                         className='block py-2 text-sm hover:bg-grey-200'
                     >
-                        First link
+                        Second link
                     </a>
                 </div>
             </nav>
