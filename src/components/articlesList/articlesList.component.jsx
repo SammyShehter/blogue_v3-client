@@ -5,6 +5,14 @@ import './articlesList.component.scss'
 export const ArticlesList = ({ articles }) => {
     if (!articles.length) return <h1>No Articles here yet!</h1>
 
+    const dateOptions = {
+        day: 'numeric',
+        month: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+    }
+
     const articlesOrder = articles.map((article) => {
         return (
             <div
@@ -19,7 +27,12 @@ export const ArticlesList = ({ articles }) => {
 
                 <div class='p-6 md:p-8 text-left space-y-4'>
                     <div class='text-sky-500 dark:text-sky-400'>
-                        <p>date-here</p>
+                        <p>
+                            {new Date(article.createdAt).toLocaleString(
+                                'he-IL',
+                                dateOptions
+                            )}
+                        </p>
                     </div>
                     <blockquote>
                         <Link
@@ -31,7 +44,7 @@ export const ArticlesList = ({ articles }) => {
                     </blockquote>
                     <figcaption class='font-medium'>
                         <div class='text-slate-700 dark:text-slate-500'>
-                            Some text
+                            {article.preview}
                         </div>
                     </figcaption>
                 </div>
@@ -39,5 +52,5 @@ export const ArticlesList = ({ articles }) => {
         )
     })
 
-    return <div className='col s12 m8'>{articlesOrder}</div>
+    return <div className='container mx-auto'>{articlesOrder}</div>
 }

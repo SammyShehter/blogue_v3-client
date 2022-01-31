@@ -3,9 +3,8 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { useRoutes } from './routes'
 import { useAuth } from './hooks/auth.hook'
 import AuthContext from './contexts/auth.context'
-import { Navbar } from './components/navbar/navbar.component'
 import { Loader } from './components/loader/loader.component'
-import { PrivateNavBar } from './components/privateNavbar/privateNavbar.component'
+
 
 function App() {
     const { token, login, logout, ready } = useAuth()
@@ -24,8 +23,7 @@ function App() {
     return (
         <AuthContext.Provider value={authContextValue}>
             <Router>
-                {isAuhtenticated ? <PrivateNavBar/> : <Navbar/>}
-                <div className='container mx-auto'>{routes}</div>
+                <div className='h-screen'>{routes}</div>
             </Router>
         </AuthContext.Provider>
     )
