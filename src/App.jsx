@@ -4,6 +4,8 @@ import { useRoutes } from './routes'
 import { useAuth } from './hooks/auth.hook'
 import AuthContext from './contexts/auth.context'
 import { Loader } from './components/loader/loader.component'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
@@ -17,11 +19,12 @@ function App() {
     }
     const routes = useRoutes(isAuhtenticated)
 
-    if(!ready){
+    if (!ready) {
         return <Loader />
     }
     return (
         <AuthContext.Provider value={authContextValue}>
+            <ToastContainer/>
             <Router>
                 <div className='h-screen'>{routes}</div>
             </Router>

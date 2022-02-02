@@ -39,7 +39,7 @@ export const Navbar = () => {
     }
     return (
         <>
-            <nav class='bg-white'>
+            <nav className='bg-white'>
                 <div className='max-w-screen-2xl mx-auto'>
                     <div className='flex justify-between items-center'>
                         <div className='flex space-x-4 py-0'>
@@ -90,9 +90,9 @@ export const Navbar = () => {
                                 stroke='currentColor'
                             >
                                 <path
-                                    stroke-linecap='round'
-                                    stroke-linejoin='round'
-                                    stroke-width='2'
+                                    strokeLinecap='round'
+                                    strokeLinejoin='round'
+                                    strokeWidth='2'
                                     d='M4 6h16M4 12h16M4 18h16'
                                 />
                             </svg>

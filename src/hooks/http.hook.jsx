@@ -10,22 +10,22 @@ export const useHttp = () => {
                 setLoading(true)
                 const response = await axios({
                     method,
-                    url: `https://${url}`,
+                    url: `http://${url}`,
                     data,
-                    headers
+                    headers,
                 })
                 setLoading(false)
                 return response.data
             } catch (e) {
-                setLoading(false)
                 setErrors(e.response.data.errors)
+                setLoading(false)
                 throw e
             }
         },
         []
     )
 
-    const clearErrors = () => setErrors([])
+    const clearErrors = useCallback(() => setErrors([]))
 
     return { loading, request, errors, clearErrors }
 }

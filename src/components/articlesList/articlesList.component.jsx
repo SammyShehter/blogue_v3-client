@@ -20,13 +20,13 @@ export const ArticlesList = ({ articles }) => {
                 key='{article.slug}'
             >
                 <img
-                    class='object-cover h-96'
+                    className='object-cover h-96'
                     src={`./${article.image}.jpg`}
                     alt='x'
                 />
 
-                <div class='p-6 md:p-8 text-left space-y-4'>
-                    <div class='text-sky-500 dark:text-sky-400'>
+                <div className='p-6 md:p-8 text-left space-y-4'>
+                    <div className='text-sky-500 dark:text-sky-400'>
                         <p>
                             {new Date(article.createdAt).toLocaleString(
                                 'he-IL',
@@ -36,14 +36,14 @@ export const ArticlesList = ({ articles }) => {
                     </div>
                     <blockquote>
                         <Link
-                            class='text-lg font-medium'
+                            className='text-lg font-medium'
                             to={`post/${article.slug}`}
                         >
                             {article.title}
                         </Link>
                     </blockquote>
-                    <figcaption class='font-medium'>
-                        <div class='text-slate-700 dark:text-slate-500'>
+                    <figcaption className='font-medium'>
+                        <div className='text-slate-700 dark:text-slate-500'>
                             {article.preview}
                         </div>
                     </figcaption>

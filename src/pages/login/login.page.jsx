@@ -1,24 +1,24 @@
 import React, { useContext, useState } from 'react'
 import './login.page.scss'
 import { useHttp } from '../../hooks/http.hook'
-import { useEffect } from 'react'
-import { useMessage } from '../../hooks/message.hook'
 import authContext from '../../contexts/auth.context'
+import { Loader } from '../../components/loader/loader.component'
+import { toast } from 'react-toastify'
+import { useEffect } from 'react/cjs/react.development'
 
 export const AuthPage = () => {
     const auth = useContext(authContext)
-    const message = useMessage()
-    const { loading, request, errors } = useHttp()
+    const { loading, request, errors, clearErrors } = useHttp()
     const [form, setForm] = useState({
         username: '',
         password: '',
     })
 
     useEffect(() => {
-        errors.forEach((error) => {
-            message(`${error.param}: ${error.message}`)
-        })
-    }, [errors, message])
+        if (errors.length) {
+            toast(errors[0].msg)
+        }
+    }, [errors])
 
     const changeHandler = (event) => {
         setForm({
@@ -35,22 +35,51 @@ export const AuthPage = () => {
         } catch (e) {}
     }
 
+    const dayNightBg = () => {
+        const clock = new Date().getHours()
+        const inlineStyle = {
+            background: 'url("./12.jpeg") center',
+            backgroundSize: 'cover',
+        }
+        clock > 7 && clock < 19
+            ? (inlineStyle.background = 'url("./12.jpeg") center')
+            : (inlineStyle.background = 'url("./24.jpeg") center')
+        return inlineStyle
+    }
+
     return (
-        <div className='grid place-content-center h-screen'>
-            <div className='p-8 bg-gray-600 login-box'>
-                <div class='p-2'>
+        <div
+            className='grid place-content-center h-screen'
+            style={dayNightBg()}
+        >
+            <div className='p-8 bg-gray-300/50 login-box'>
+                <h3 className='text-center p-1 text-3xl text-white'>Welcome</h3>
+                <div className='p-2'>
                     <input
                         type='text'
-                        class='relative outline-none border border-gray-400 rounded py-3 px-3 w-full bg-white text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:shadow-outline'
-                        placeholder='placeholder'
+                        name='username'
+                        className='relative outline-none border border-gray-400 rounded py-3 px-3 w-full bg-white text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:shadow-outline'
+                        placeholder='Username'
+                        onChange={changeHandler}
                     />
                 </div>
-                <div class='p-2'>
+                <div className='p-2'>
                     <input
-                        type='text'
-                        class='relative outline-none border border-gray-400 rounded py-3 px-3 w-full bg-white text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:shadow-outline'
-                        placeholder='placeholder'
+                        type='password'
+                        name='password'
+                        className='relative outline-none border border-gray-400 rounded py-3 px-3 w-full bg-white text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:shadow-outline'
+                        placeholder='Password'
+                        onChange={changeHandler}
                     />
+                </div>
+                <div className='p-2'>
+                    <button
+                        className='w-full bg-blue-500 rounded h-10 text-white'
+                        onClick={loginHandler}
+                        disabled={loading}
+                    >
+                        {loading ? <Loader /> : 'Sign in'}
+                    </button>
                 </div>
             </div>
         </div>

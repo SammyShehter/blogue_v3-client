@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 // import { useContext } from 'react'
 import { ArticlesList } from '../../components/articlesList/articlesList.component'
-import { Loader } from '../../components/loader/loader.component'
+import { FullLoader } from '../../components/loader/loader.component'
 import authContext from '../../contexts/auth.context'
 import { useHttp } from '../../hooks/http.hook'
 import { Navbar } from '../../components/navbar/navbar.component'
@@ -37,7 +37,7 @@ export const MainPage = () => {
         getArticles()
     }, [getArticles])
 
-    if (loading) return <Loader />
+    if (loading) return <FullLoader />
 
     return (
         <>
