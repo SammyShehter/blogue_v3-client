@@ -13,7 +13,6 @@ export const PrivateNavBar = () => {
     const logoutHandler = (e) => {
         e.preventDefault()
         auth.logout()
-        navigate('/')
     }
 
     const manipulateMobileMenu = () => {
@@ -67,9 +66,9 @@ export const PrivateNavBar = () => {
                         {/* secondary nav */}
                         <div>
                             <div className='hidden md:flex item-center text-gray-700 hover:text-black transition duration-300'>
-                                <a className='py-3 px-7' onClick={logoutHandler}>
+                                <NavLink className='py-3 px-7' onClick={logoutHandler} to={'/'}>
                                     Logout
-                                </a>
+                                </NavLink>
                             </div>
                         </div>
                         {/* mobile buttons here */}

@@ -35,6 +35,7 @@ export const AuthPage = () => {
                 ...form,
             })
             login(response.data.token)
+            toast('Welcome back')
             navigate('/admin')
         } catch (e) {
             console.log(e)
