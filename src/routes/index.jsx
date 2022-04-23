@@ -9,6 +9,10 @@ export const useRoutes = (isAuhtenticated) => {
     if (isAuhtenticated) {
         return (
             <Routes>
+                <Route path="*" element={<Navigate to ="/" />} />
+                <Route exact path='/' element={<MainPage />} />
+                <Route exact path="/login" element={<Navigate to ="/admin" />}/>
+                <Route exact path='/post/:slug' element={<ArticlePage />} />
                 <Route exact path='/admin' element={<CreatePage />} />
             </Routes>
         )

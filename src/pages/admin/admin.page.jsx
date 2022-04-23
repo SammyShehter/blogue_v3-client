@@ -1,14 +1,21 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import authContext from '../../contexts/auth.context'
+import { AuthContext } from '../../contexts/auth.context'
 import { useHttp } from '../../hooks/http.hook'
 import './admin.page.scss'
 
 export const CreatePage = () => {
-    const history = useNavigate()
+    const navigate = useNavigate()
     const { request } = useHttp()
-    const { token } = useContext(authContext)
     const [link, setLink] = useState('')
+    const {verifyUser, token, logout} = useContext(AuthContext)
+    useEffect(async () => {
+        if(!token) {
+            logout()
+        }
+        await verifyUser(token)
+    }, []) 
+    
 
     const pressHandler = async (e) => {
         if (e.key === 'Enter') {
@@ -20,7 +27,7 @@ export const CreatePage = () => {
                     { from: link },
                     { authorization: `Bearer ${token}` }
                 )
-                history.push(`/details/${data.link._id}`)
+                navigate(`/details/${data.link._id}`)
             } catch (e) {}
         }
     }
@@ -34,7 +41,7 @@ export const CreatePage = () => {
                 { from: link },
                 { authorization: `Bearer ${token}` }
             )
-            history.push(`/details/${data}`)
+            navigate(`/details/${data}`)
         } catch (e) {}
     }
 

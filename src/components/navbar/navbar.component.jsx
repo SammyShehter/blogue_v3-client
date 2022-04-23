@@ -1,13 +1,10 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
-import authContext from '../../contexts/auth.context'
+import React, { useEffect, useRef, useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import {base64Boy} from '../../styles/base64Boy'
 import './navbar.component.scss'
-import { base64Boy } from './base64Boy.js'
 
 export const Navbar = () => {
     const ref = useRef()
-    const history = useNavigate()
-    const auth = useContext(authContext)
     const [switchMobMenu, setSwitchMobMenu] = useState(false)
 
     const manipulateMobileMenu = () => {
@@ -32,11 +29,6 @@ export const Navbar = () => {
         }
     }, [switchMobMenu])
 
-    const logoutHandler = (e) => {
-        e.preventDefault()
-        auth.logout()
-        history.push('/')
-    }
     return (
         <>
             <nav className='bg-white'>

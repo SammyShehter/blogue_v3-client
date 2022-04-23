@@ -1,10 +1,9 @@
 import {createContext} from 'react'
 
-export const defaultState = {
+export const AuthContext = createContext({
     token: '',
-    login: () => {},
+    login: async () => {},
     logout: () => {},
-    isAuhtenticated: false
-}
-
-export default createContext(defaultState)
+    isAuhtenticated: false,
+    verifyUser: async () => {}
+})

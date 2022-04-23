@@ -1,14 +1,13 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react'
-// import { useContext } from 'react'
+import {AuthContext} from '../../contexts/auth.context'
 import { ArticlesList } from '../../components/articlesList/articlesList.component'
 import { FullLoader } from '../../components/loader/loader.component'
-import authContext from '../../contexts/auth.context'
 import { useHttp } from '../../hooks/http.hook'
 import { Navbar } from '../../components/navbar/navbar.component'
 import { PrivateNavBar } from '../../components/privateNavbar/privateNavbar.component'
 
 export const MainPage = () => {
-    const {token, isAuhtenticated} = useContext(authContext)
+    const { auhtenticated } = useContext(AuthContext)
     const { request, loading } = useHttp()
     const [articles, setArticles] = useState([])
 
@@ -41,7 +40,7 @@ export const MainPage = () => {
 
     return (
         <>
-        {isAuhtenticated ? <PrivateNavBar/> : <Navbar/>}
+        {auhtenticated ? <PrivateNavBar/> : <Navbar/>}
         <ArticlesList articles={articles}/>
         </>
     )
