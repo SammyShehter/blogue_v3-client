@@ -3,17 +3,19 @@ import { BrowserRouter as Router } from "react-router-dom"
 import { useRoutes } from "./routes"
 import { AuthContext } from "./contexts/auth.context"
 import { ToastContainer } from "react-toastify"
-import "react-toastify/dist/ReactToastify.css"
 import { useAuth } from "./hooks/auth.hook"
+import { FullLoader } from "./components/loader/loader.component"
+import "react-toastify/dist/ReactToastify.css"
 
 function App() {
-    const { token, login, logout, auhtenticated, verifyUser } = useAuth()
+    const { token, login, logout, auhtenticated, verifyUser, ready } = useAuth()
     const authContextValue = {
         token,
         login,
         logout,
         auhtenticated,
-        verifyUser
+        verifyUser,
+        ready,
     }
 
     const routes = useRoutes(auhtenticated)
@@ -21,9 +23,13 @@ function App() {
     return (
         <AuthContext.Provider value={authContextValue}>
             <ToastContainer />
-            <Router>
-                <div className="h-screen">{routes}</div>
-            </Router>
+            {ready ? (
+                <Router>
+                    <div className="h-screen">{routes}</div>
+                </Router>
+            ) : (
+                <FullLoader />
+            )}
         </AuthContext.Provider>
     )
 }
