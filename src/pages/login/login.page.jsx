@@ -1,9 +1,8 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useState, useEffect } from "react"
 import "./login.page.scss"
 import { useHttp } from "../../hooks/http.hook"
 import { Loader } from "../../components/loader/loader.component"
 import { toast } from "react-toastify"
-import { useEffect } from "react/cjs/react.development"
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../../contexts/auth.context"
 
