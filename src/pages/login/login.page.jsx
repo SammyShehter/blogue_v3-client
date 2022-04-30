@@ -4,12 +4,13 @@ import { useHttp } from "../../hooks/http.hook"
 import { Loader } from "../../components/loader/loader.component"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
-import { AuthContext } from "../../contexts/auth.context"
+import { AppContext } from "../../contexts/app.context"
+import { routes } from "../../utils/dictionary"
 
 
 export const AuthPage = () => {
     const { loading, request, errors } = useHttp()
-    const { login } = useContext(AuthContext)
+    const { login } = useContext(AppContext)
     const navigate = useNavigate()
     const [form, setForm] = useState({
         username: "",
@@ -30,7 +31,7 @@ export const AuthPage = () => {
     }
     const loginHandler = async () => {
         try {
-            const response = await request("localhost:10000/login", "POST", {
+            const response = await request(`${routes.USERS}/login`, "POST", {
                 ...form,
             })
             login(response.data.token)

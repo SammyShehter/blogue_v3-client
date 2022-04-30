@@ -1,32 +1,45 @@
 import React, { useCallback, useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { ArticlePreview } from "../../components/articlePreview/articlePreview.component"
-import { Loader } from "../../components/loader/loader.component"
-import { AuthContext } from "../../contexts/auth.context"
+import { ArticleView } from "../../components/articleView/articleView.component"
+import { FullLoader } from "../../components/loader/loader.component"
+import { Navbar } from "../../components/navbar/navbar.component"
+import { PrivateNavBar } from "../../components/privateNavbar/privateNavbar.component"
+import { AppContext } from "../../contexts/app.context"
 import { useHttp } from "../../hooks/http.hook"
 
 export const ArticlePage = () => {
-    const { request, loading } = useHttp()
-    const { token } = useContext(AuthContext)
-    const [link, setLink] = useState({})
-    const { id } = useParams()
+    const { request, loading: httpLoading } = useHttp()
+    const { token, auhtenticated, posts, addPostToStorage } = useContext(AppContext)
+    const { slug } = useParams()
+    const [post, setPost] = useState({})
 
-    const getLink = useCallback(async () => {
+    const getPost = useCallback(async () => {
         try {
-            const linkData = await request(
-                `/links/byId/${id}`,
+            if (posts[slug]) {
+                setPost(posts[slug])
+                return
+            }
+
+            const postData = await request(
+                `${routes.BLOGUE}/post/${slug}`,
                 "GET",
                 {},
                 { authorization: `Bearer ${token}` }
             )
-            setLink(linkData)
+            setPost(postData.data)
+            addPostToStorage(postData.data)
         } catch (e) {}
-    }, [token, id, request])
+    }, [token, slug, request])
 
     useEffect(() => {
-        getLink()
-    }, [getLink])
+        getPost()
+    }, [])
 
-    if (loading) return <Loader />
-    return <>{!loading && link && <ArticlePreview link={link} />}</>
+    if (httpLoading) return <FullLoader />
+    return (
+        <>
+            {auhtenticated ? <PrivateNavBar /> : <Navbar />}
+            {!httpLoading && post && <ArticleView post={post} />}
+        </>
+    )
 }

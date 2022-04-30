@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react'
 import axios from 'axios'
+import { routes } from '../utils/dictionary'
 
 export const useHttp = () => {
     const [loading, setLoading] = useState(false)
@@ -10,7 +11,7 @@ export const useHttp = () => {
                 setLoading(true)
                 const response = await axios({
                     method,
-                    url: `http://${url}`,
+                    url: `${routes.HTTP}://${url}`,
                     data,
                     headers,
                 })

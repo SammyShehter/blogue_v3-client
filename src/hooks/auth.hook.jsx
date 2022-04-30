@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from "react"
+import { routes } from "../utils/dictionary"
 import { useHttp } from "./http.hook"
 
 const storageName = "userData"
@@ -40,7 +41,7 @@ export const useAuth = () => {
             }
             const headers = { Authorization: `Bearer ${token}` }
             const response = await request(
-                "localhost:10000/validation",
+                `${routes.USERS}/validation`,
                 "POST",
                 {},
                 headers

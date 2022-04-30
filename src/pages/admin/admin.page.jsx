@@ -1,18 +1,18 @@
 import React, { useState, useContext, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
-import { FullLoader, Loader } from "../../components/loader/loader.component"
-import { AuthContext } from "../../contexts/auth.context"
+import { Loader } from "../../components/loader/loader.component"
+import { AppContext } from "../../contexts/app.context"
 import { useHttp } from "../../hooks/http.hook"
+import { routes } from "../../utils/dictionary"
 import "./admin.page.scss"
 
 export const CreatePage = () => {
-    const navigate = useNavigate()
     const { request, loading } = useHttp()
     const [title, setTitle] = useState("")
     const [text, setText] = useState("")
     const [preview, setPreview] = useState("")
-    const { verifyUser, token, logout } = useContext(AuthContext)
+    const { verifyUser, token, logout } = useContext(AppContext)
 
     useEffect(_initAdmin, [])
 
@@ -31,7 +31,7 @@ export const CreatePage = () => {
                     return
                 }
                 const data = await request(
-                    "localhost:8000/post",
+                    `${routes.BLOGUE}/post`,
                     "POST",
                     {
                         title,

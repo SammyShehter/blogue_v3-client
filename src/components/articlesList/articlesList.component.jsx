@@ -1,32 +1,28 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { Link } from 'react-router-dom'
+import { AppContext } from '../../contexts/app.context'
 import './articlesList.component.scss'
 
 export const ArticlesList = ({ articles }) => {
-    if (!articles.length) return <h1>No Articles here yet!</h1>
 
-    const dateOptions = {
-        day: 'numeric',
-        month: 'numeric',
-        year: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-    }
+    const {dateOptions} = useContext(AppContext)
+
+    if (!articles.length) return <h1>No Articles here yet!</h1>
 
     const articlesOrder = articles.map((article) => {
         return (
             <div
-                className='flex flex-col bg-white mx-3 mt-12 lg:px-0 lg:w-7/12'
-                key='{article.slug}'
+                className='flex flex-col bg-white mx-1 mt-12 lg:px-0 lg:w-7/12'
+                key={article.slug}
             >
                 <img
                     className='object-cover h-96'
-                    src={`./${article.image}.jpg`}
-                    alt='x'
+                    src={`/${article.image}.jpg`}
+                    alt={article.image}
                 />
 
                 <div className='p-6 md:p-8 text-left space-y-4'>
-                    <div className='text-sky-500 dark:text-sky-400'>
+                    <div className='text-sky-500 dark:text-sky-400 text-sm'>
                         <p>
                             {new Date(article.createdAt).toLocaleString(
                                 'he-IL',
@@ -36,7 +32,7 @@ export const ArticlesList = ({ articles }) => {
                     </div>
                     <blockquote>
                         <Link
-                            className='text-lg font-medium'
+                            className='font-medium text-2xl'
                             to={`post/${article.slug}`}
                         >
                             {article.title}

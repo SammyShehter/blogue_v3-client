@@ -1,12 +1,12 @@
 import React, { useRef, useState, useEffect, useContext } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { AuthContext } from '../../contexts/auth.context'
+import { AppContext } from '../../contexts/app.context'
 import {base64Boy} from '../../styles/base64Boy'
 import './privateNavbar.component.scss'
 
 export const PrivateNavBar = () => {
     const navigate = useNavigate()
-    const auth = useContext(AuthContext)
+    const auth = useContext(AppContext)
     const ref = useRef()
     const [switchMobMenu, setSwitchMobMenu] = useState(false)
 
