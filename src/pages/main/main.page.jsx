@@ -5,6 +5,7 @@ import { FullLoader } from '../../components/loader/loader.component'
 import { useHttp } from '../../hooks/http.hook'
 import { Navbar } from '../../components/navbar/navbar.component'
 import { PrivateNavBar } from '../../components/privateNavbar/privateNavbar.component'
+import { routes } from '../../utils/dictionary'
 
 export const MainPage = () => {
     const { auhtenticated } = useContext(AppContext)

@@ -6,6 +6,7 @@ import { Navbar } from "../../components/navbar/navbar.component"
 import { PrivateNavBar } from "../../components/privateNavbar/privateNavbar.component"
 import { AppContext } from "../../contexts/app.context"
 import { useHttp } from "../../hooks/http.hook"
+import { routes } from "../../utils/dictionary"
 
 export const ArticlePage = () => {
     const { request, loading: httpLoading } = useHttp()
